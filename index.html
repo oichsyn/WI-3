@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title></title>
+<style>
+  html, body {height:100%; margin:0;}
+  
+  body {background-image: url(back.jpg);
+      background-position: center;
+      background-attachment: fixed;
+      align-items: center;}
+
+  .sound-img {position:absolute; width:300px; 
+              cursor:pointer; user-select:none;}
+
+  #janggu {bottom:170px; left:160px; transform:rotate(-15deg);}
+  #ggang  {top:270px; right:360px;  transform:rotate(30deg);}
+  #voice {bottom:40px; right:100px;}
+  #nodo {top:80px; left:270px;}
+
+
+</style>
+</head>
+
+
+<body>
+
+<audio id="janggu-1" src="janggu-1.mp3"></audio>
+<audio id="ggang-2"  src="ggang-2.mp3"></audio>
+<audio id="voice-1"  src="voice-1.mp3"></audio>
+<audio id="nodo-1"  src="nodo-1.mp3"></audio>
+
+
+<img id="janggu" class="sound-img"
+     src="janggu-black.png" data-gray="janggu-black.png" data-color="janggu.png" alt="">
+<img id="ggang"  class="sound-img"
+     src="ggang-black.png"  data-gray="ggang-black.png"  data-color="ggang.png"  alt="">
+<img id="voice"  class="sound-img"
+     src="voice-black.png"  data-gray="voice-black.png"  data-color="voice.png"  alt="">
+<img id="nodo"  class="sound-img"
+     src="nodo-black.png"  data-gray="nodo-black.png"  data-color="nodo.png"  alt="">
+<audio id="bgm" src="bgm.mp3" preload="auto" loop></audio>
+
+
+<script>
+  let jPlay = false; 
+  let gPlay = false; 
+  let vPlay = false; 
+  let nPlay = false; 
+
+  const jangguImg = document.getElementById('janggu');
+  const ggangImg  = document.getElementById('ggang');
+  const voiceImg  = document.getElementById('voice');
+  const nodoImg  = document.getElementById('nodo');
+
+  const jangguSound = document.getElementById('janggu-1');
+  const ggangSound  = document.getElementById('ggang-2');
+  const voiceSound  = document.getElementById('voice-1');
+  const nodoSound  = document.getElementById('nodo-1');
+
+  const bgm = document.getElementById('bgm');
+  document.body.addEventListener('click', () => {
+    bgm.play().catch}, { once:true }); 
+
+
+
+  function setColor(imgEl, isColor){
+    imgEl.src = isColor ? imgEl.dataset.color : imgEl.dataset.gray;
+    imgEl.style.filter = isColor ? 'grayscale(0%)' : 'grayscale(100%)';
+  }
+
+  jangguImg.onclick = function(){
+    if (jPlay) {
+      jangguSound.pause();
+      jangguSound.currentTime = 0;
+      setColor(jangguImg, false);
+      jPlay = false;} 
+      else {
+      jangguSound.currentTime = 0;
+      jangguSound.play().catch(()=>{});
+      setColor(jangguImg, true);
+      jPlay = true;
+    }
+  };
+
+  ggangImg.onclick = function(){
+    if (gPlay) {
+      ggangSound.pause();
+      ggangSound.currentTime = 0;
+      setColor(ggangImg, false);
+      gPlay = false;} 
+      else {
+      ggangSound.currentTime = 0;
+      ggangSound.play().catch(()=>{});
+      setColor(ggangImg, true);
+      gPlay = true;
+    }
+  };
+
+    voiceImg.onclick = function(){
+    if (vPlay) {
+      voiceSound.pause();
+      voiceSound.currentTime = 0;
+      setColor(voiceImg, false);
+      vPlay = false;} 
+      else {
+      voiceSound.currentTime = 0;
+      voiceSound.play().catch(()=>{});
+      setColor(voiceImg, true);
+      vPlay = true;
+    }
+  };
+
+    nodoImg.onclick = function(){
+    if (nPlay) {
+      nodoSound.pause();
+      nodoSound.currentTime = 0;
+      setColor(nodoImg, false);
+      nPlay = false;} 
+      else {
+      nodoSound.currentTime = 0;
+      nodoSound.play().catch(()=>{});
+      setColor(nodoImg, true);
+      nPlay = true;
+    }
+  };
+
+  jangguSound.onended = ()=>{ setColor(jangguImg,false); jPlay=false; };
+  ggangSound.onended  = ()=>{ setColor(ggangImg,false);  gPlay=false;  };
+  voiceSound.onended  = ()=>{ setColor(voiceImg,false);  vPlay=false;  };
+  nodoSound.onended  = ()=>{ setColor(nodoImg,false);  nPlay=false;  };
+
+
+</script>
+</body>
+</html>
